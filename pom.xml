@@ -26,7 +26,7 @@
     <license.plugin.version>3.0</license.plugin.version>
 
     <!-- TODO: update to 9.4.32 as soon as PR https://github.com/eclipse/jetty.project/pull/5273 is merged -->
-    <jetty.version>9.4.32-SNAPSHOT</jetty.version>
+    <jetty.version>11.0.0.beta1</jetty.version>
     <jetty.test.helper.version>5.4</jetty.test.helper.version>
   </properties>
 
