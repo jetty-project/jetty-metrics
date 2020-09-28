@@ -31,7 +31,7 @@ import javax.servlet.ServletResponse;
 
 import org.eclipse.jetty.servlet.FilterHolder;
 
-public class MetricsFilterWrapper extends FilterHolder.WrapperFilter
+public class MetricsFilterWrapper extends FilterHolder.Wrapper
 {
     private final ServletMetricsListener metricsListener;
 
@@ -45,12 +45,12 @@ public class MetricsFilterWrapper extends FilterHolder.WrapperFilter
     public void init(FilterConfig filterConfig) throws ServletException
     {
         ServletContext servletContext = filterConfig.getServletContext();
-        Filter delegate = getWrappedFilter();
+        Filter delegate = getWrapped();
         long start = System.nanoTime();
         try
         {
             metricsListener.onFilterStarting(servletContext, delegate);
-            this.getWrappedFilter().init(filterConfig);
+            this.getWrapped().init(filterConfig);
         }
         finally
         {
@@ -64,7 +64,7 @@ public class MetricsFilterWrapper extends FilterHolder.WrapperFilter
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
     {
         ServletContext servletContext = request.getServletContext();
-        Filter delegate = getWrappedFilter();
+        Filter delegate = getWrapped();
         long start = System.nanoTime();
         try
         {

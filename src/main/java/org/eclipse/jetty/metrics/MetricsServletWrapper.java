@@ -31,7 +31,7 @@ import javax.servlet.ServletResponse;
 
 import org.eclipse.jetty.servlet.ServletHolder;
 
-public class MetricsServletWrapper extends ServletHolder.WrapperServlet
+public class MetricsServletWrapper extends ServletHolder.Wrapper
 {
     private final ServletMetricsListener metricsListener;
 
@@ -48,7 +48,7 @@ public class MetricsServletWrapper extends ServletHolder.WrapperServlet
     public void init(ServletConfig config) throws ServletException
     {
         ServletContext servletContext = config.getServletContext();
-        Servlet delegate = getWrappedServlet();
+        Servlet delegate = getWrapped();
         long start = System.nanoTime();
         try
         {
@@ -70,7 +70,7 @@ public class MetricsServletWrapper extends ServletHolder.WrapperServlet
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException
     {
         ServletContext servletContext = req.getServletContext();
-        Servlet delegate = Objects.requireNonNull(getWrappedServlet());
+        Servlet delegate = Objects.requireNonNull(getWrapped());
         long start = System.nanoTime();
         try
         {

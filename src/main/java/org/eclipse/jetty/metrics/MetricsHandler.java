@@ -40,9 +40,9 @@ import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class MetricsHandler extends ContainerLifeCycle
-    implements ServletHolder.WrapperFunction,
-    FilterHolder.WrapperFunction,
-    ListenerHolder.WrapperFunction,
+    implements ServletHolder.WrapFunction,
+    FilterHolder.WrapFunction,
+    ListenerHolder.WrapFunction,
     Configuration.WrapperFunction,
     HttpChannel.Listener,
     LifeCycle.Listener
@@ -168,7 +168,7 @@ public class MetricsHandler extends ContainerLifeCycle
     {
         LOG.info("wrapFilter({})", filter);
         Filter unwrapped = filter;
-        while (unwrapped instanceof FilterHolder.WrapperFilter)
+        while (unwrapped instanceof FilterHolder.Wrapper)
         {
             // Are we already wrapped somewhere along the line?
             if (unwrapped instanceof MetricsFilterWrapper)
@@ -177,7 +177,7 @@ public class MetricsHandler extends ContainerLifeCycle
                 return filter;
             }
             // Unwrap
-            unwrapped = ((FilterHolder.WrapperFilter)unwrapped).getWrappedFilter();
+            unwrapped = ((FilterHolder.Wrapper)unwrapped).getWrapped();
         }
 
         return new MetricsFilterWrapper(filter, metricsListener);
@@ -188,7 +188,7 @@ public class MetricsHandler extends ContainerLifeCycle
     {
         LOG.info("wrapServlet({})", servlet);
         Servlet unwrapped = servlet;
-        while (unwrapped instanceof ServletHolder.WrapperServlet)
+        while (unwrapped instanceof ServletHolder.Wrapper)
         {
             // Are we already wrapped somewhere along the line?
             if (unwrapped instanceof MetricsServletWrapper)
@@ -197,7 +197,7 @@ public class MetricsHandler extends ContainerLifeCycle
                 return servlet;
             }
             // Unwrap
-            unwrapped = ((ServletHolder.WrapperServlet)unwrapped).getWrappedServlet();
+            unwrapped = ((ServletHolder.Wrapper)unwrapped).getWrapped();
         }
 
         return new MetricsServletWrapper(servlet, metricsListener);
