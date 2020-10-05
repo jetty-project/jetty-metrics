@@ -26,7 +26,7 @@
     <license.plugin.version>3.0</license.plugin.version>
 
     <jetty.version>9.4.32-SNAPSHOT</jetty.version>
-    <jetty.test.helper.version>5.4</jetty.test.helper.version>
+    <jetty.test.helper.version>5.5</jetty.test.helper.version>
   </properties>
 
   <dependencies>
