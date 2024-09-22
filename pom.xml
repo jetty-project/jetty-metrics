@@ -25,7 +25,7 @@
     <maven.deploy.plugin.version>3.1.2</maven.deploy.plugin.version>
     <license.plugin.version>4.3</license.plugin.version>
 
-    <jetty.version>9.4.55.v20240627</jetty.version>
+    <jetty.version>9.4.56.v20240826</jetty.version>
     <jetty.test.helper.version>5.9</jetty.test.helper.version>
   </properties>
 
